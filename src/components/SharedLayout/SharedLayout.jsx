@@ -1,7 +1,9 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { ReactComponent as ReactLogo } from '../../images/tmdb-logo.svg';
 
-export const SharedLayout = () => {
+export default SharedLayout;
+
+function SharedLayout() {
   return (
     <div className="container">
       <header>
@@ -22,7 +24,9 @@ export const SharedLayout = () => {
           </ul>
         </nav>
       </header>
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
-};
+}

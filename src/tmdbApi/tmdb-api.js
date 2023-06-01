@@ -1,7 +1,16 @@
-import axios from 'axios';
+export { getTrending, getMovies, getDetails };
 
 const ORIGIN = 'https://api.themoviedb.org/3/';
-const API_KEY = 'b84a5032315fba75f240b745ca7cc0af';
+const API_TOKEN =
+  'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiODRhNTAzMjMxNWZiYTc1ZjI0MGI3NDVjYTdjYzBhZiIsInN1YiI6IjY0NzBiZWJlMzM2ZTAxMDBlODBjNTYyZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.f2kRYsL7gY4sDbVFKpKd_M1rnGrppV5NDL6eESs9EQU';
+
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: API_TOKEN,
+  },
+};
 
 const requestParametersTrending = {
   pathname: 'trending/movie/day',
@@ -18,33 +27,50 @@ const requestParametersMovie = {
   },
 };
 
-async function getTMDBResponse(requestParameters) {
-  const URL = buildUrlString(requestParameters);
+const requestParametersDetails = {
+  pathname: '',
+  queries: { language: 'en-US' },
+  addId: function (id) {
+    this.pathname += `/${id}`;
+  },
+};
 
+async function getTrending() {
+  const url = buildUrlString(requestParametersTrending);
   try {
-    const response = await axios.get(URL);
-    const data = response.data;
+    const response = await fetch(url, options);
+    return await response.json();
+  } catch (err) {
+    return console.error(err);
+  }
+}
 
-    // const pagesAmount = Math.ceil(
-    //   images.totalHits / requestParameters.per_page
-    // );
+async function getMovies(query) {
+  requestParametersMovie.queries.query = query;
+  const url = buildUrlString(requestParametersMovie);
+  try {
+    const response = await fetch(url, options);
+    return await response.json();
+  } catch (err) {
+    return console.error(err);
+  }
+}
 
-    // if (requestParameters.page === pagesAmount || pagesAmount === 0) {
-    //   requestParameters.page = 1;
-    // } else {
-    //   requestParameters.page += 1;
-    // }
-
-    return data;
-  } catch (error) {
-    console.log(error);
+async function getDetails(id) {
+  requestParametersDetails.pathname = `movie/${id}`;
+  const url = buildUrlString(requestParametersDetails);
+  try {
+    const response = await fetch(url, options);
+    return await response.json();
+  } catch (err) {
+    return console.error(err);
   }
 }
 
 function buildUrlString(requestParameters) {
   const { pathname, queries } = requestParameters;
   const queriesString = buildQueryString(queries);
-  return `${ORIGIN}${pathname}?api_key=${API_KEY}&${queriesString}`;
+  return `${ORIGIN}${pathname}?${queriesString}`;
 }
 
 function buildQueryString(queries) {
@@ -54,5 +80,3 @@ function buildQueryString(queries) {
     })
     .join('&');
 }
-
-export { getTMDBResponse, requestParametersTrending, requestParametersMovie };

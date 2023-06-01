@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { getTMDBResponse, requestParametersMovie } from 'tmdbApi/tmdb-api';
+import { getMovies } from 'tmdbApi/tmdb-api';
 import Searchbar from 'components/Searchbar';
 import MoviesList from 'components/MoviesList';
 
@@ -16,9 +16,8 @@ function Movies() {
   useEffect(() => {
     setSearchedMovies([]);
     if (query !== '') {
-      requestParametersMovie.queries.query = query;
       try {
-        getTMDBResponse(requestParametersMovie).then(data => {
+        getMovies(query).then(data => {
           if (data.results.length !== 0) {
             const movies = data.results.map(({ id, poster_path, title }) => {
               return { id, poster_path, title };
@@ -51,10 +50,10 @@ function Movies() {
   };
 
   return (
-    <main>
+    <>
       <h2>Movies Page</h2>
       <Searchbar onSubmit={updateSearchParams} />
       {searchedMovies.length !== 0 && <MoviesList movies={searchedMovies} />}
-    </main>
+    </>
   );
 }
