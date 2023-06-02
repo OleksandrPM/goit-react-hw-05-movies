@@ -8,7 +8,7 @@ Image.propTypes = {
   tags: PropTypes.string,
 };
 
-function Image({ URL, tags = '' }) {
+function Image({ URL, tags = 'image' }) {
   return (
     <>
       <img className={css.image} src={URL} alt={tags}></img>

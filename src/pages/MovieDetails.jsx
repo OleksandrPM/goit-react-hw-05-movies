@@ -1,32 +1,22 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import BackLink from 'components/BackLink';
 import MovieCard from 'components/MovieCard';
-import Image from 'components/Image';
 import { getDetails } from 'tmdbApi/tmdb-api';
 
 export default MovieDetails;
 
 const BASE_URL = 'https://image.tmdb.org/t/p/';
 const file_size = 'w500';
-const alternativeImage =
-  'https://pixabay.com/vectors/cutting-editing-filmstrip-150066/';
 
 function MovieDetails() {
   const { id } = useParams();
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
-  const [imgSrc, setImgSrc] = useState(alternativeImage);
-  const [title, setTitle] = useState('n/a');
-  const [releaseYear, setReleaseYear] = useState('n/a');
-  const [score, setScore] = useState('n/a');
-  const [overview, setOverview] = useState('n/a');
-  const [genres, setGenres] = useState('n/a');
-
-  const movieId = useRef(id);
+  const [details, setDetails] = useState({});
 
   const updateDetails = useCallback(() => {
-    getDetails(movieId.current)
+    getDetails(id)
       .then(
         ({
           genres,
@@ -36,16 +26,18 @@ function MovieDetails() {
           title,
           vote_average,
         }) => {
-          setImgSrc(`${BASE_URL}${file_size}${poster_path}`);
-          setTitle(title);
-          setReleaseYear(release_date.slice(0, 4));
-          setScore(Math.round(vote_average * 10));
-          setOverview(overview);
-          setGenres(getGenresString(genres));
+          setDetails({
+            imgSrc: `${BASE_URL}${file_size}${poster_path}`,
+            title: title,
+            releaseYear: release_date.slice(0, 4),
+            score: Math.round(vote_average * 10),
+            overview: overview,
+            genres: getGenresString(genres),
+          });
         }
       )
       .catch(error => console.log(error));
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     updateDetails();
@@ -54,10 +46,7 @@ function MovieDetails() {
   return (
     <>
       <BackLink backPath={backLinkHref}>Go back</BackLink>
-      <MovieCard
-        details={{ imgSrc, title, releaseYear, score, overview, genres }}
-      />
-
+      <MovieCard details={details} />
       <ul>
         <li>
           <Link to="cast">Cast</Link>

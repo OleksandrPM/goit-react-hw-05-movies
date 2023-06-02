@@ -1,0 +1,10 @@
+.cast {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cast li {
+  width: 250px;
+}

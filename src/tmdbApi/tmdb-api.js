@@ -1,8 +1,12 @@
-export { getTrending, getMovies, getDetails };
-
 const ORIGIN = 'https://api.themoviedb.org/3/';
 const API_TOKEN =
   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiODRhNTAzMjMxNWZiYTc1ZjI0MGI3NDVjYTdjYzBhZiIsInN1YiI6IjY0NzBiZWJlMzM2ZTAxMDBlODBjNTYyZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.f2kRYsL7gY4sDbVFKpKd_M1rnGrppV5NDL6eESs9EQU';
+
+const urlParams = {
+  BASE_URL: 'https://image.tmdb.org/t/p/',
+  POSTER_SIZE: 'w500',
+  PHOTO_SIZE: 'w300',
+};
 
 const options = {
   method: 'GET',
@@ -30,9 +34,11 @@ const requestParametersMovie = {
 const requestParametersDetails = {
   pathname: '',
   queries: { language: 'en-US' },
-  addId: function (id) {
-    this.pathname += `/${id}`;
-  },
+};
+
+const requestParametersCast = {
+  pathname: '',
+  queries: { language: 'en-US' },
 };
 
 async function getTrending() {
@@ -67,6 +73,17 @@ async function getDetails(id) {
   }
 }
 
+async function getCast(id) {
+  requestParametersCast.pathname = `movie/${id}/credits`;
+  const url = buildUrlString(requestParametersCast);
+  try {
+    const response = await fetch(url, options);
+    return await response.json();
+  } catch (err) {
+    return console.error(err);
+  }
+}
+
 function buildUrlString(requestParameters) {
   const { pathname, queries } = requestParameters;
   const queriesString = buildQueryString(queries);
@@ -80,3 +97,5 @@ function buildQueryString(queries) {
     })
     .join('&');
 }
+
+export { getTrending, getMovies, getDetails, getCast, urlParams };
