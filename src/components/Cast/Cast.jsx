@@ -1,7 +1,8 @@
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCast, urlParams } from 'tmdbApi/tmdb-api';
 import css from './Cast.module.css';
-import { useCallback, useEffect, useState } from 'react';
+import defaultImage from '../../images/Cast/avatar.svg';
 
 export default Cast;
 
@@ -15,7 +16,13 @@ function Cast() {
       .then(data => {
         const actors = data.cast.map(
           ({ id, profile_path, name, character }) => {
-            const imgUrl = `${BASE_URL}${PHOTO_SIZE}${profile_path}`;
+            let imgUrl = '';
+            if (profile_path !== null) {
+              imgUrl = `${BASE_URL}${PHOTO_SIZE}${profile_path}`;
+            } else {
+              imgUrl = defaultImage;
+            }
+
             return { id, imgUrl, name, character };
           }
         );

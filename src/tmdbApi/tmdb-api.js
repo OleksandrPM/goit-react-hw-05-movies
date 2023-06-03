@@ -41,6 +41,11 @@ const requestParametersCast = {
   queries: { language: 'en-US' },
 };
 
+const requestParametersReviews = {
+  pathname: '',
+  queries: { language: 'en-US', page: 1 },
+};
+
 async function getTrending() {
   const url = buildUrlString(requestParametersTrending);
   try {
@@ -84,6 +89,17 @@ async function getCast(id) {
   }
 }
 
+async function getReviews(id) {
+  requestParametersReviews.pathname = `movie/${id}/reviews`;
+  const url = buildUrlString(requestParametersReviews);
+  try {
+    const response = await fetch(url, options);
+    return await response.json();
+  } catch (err) {
+    return console.error(err);
+  }
+}
+
 function buildUrlString(requestParameters) {
   const { pathname, queries } = requestParameters;
   const queriesString = buildQueryString(queries);
@@ -98,4 +114,4 @@ function buildQueryString(queries) {
     .join('&');
 }
 
-export { getTrending, getMovies, getDetails, getCast, urlParams };
+export { getTrending, getMovies, getDetails, getCast, getReviews, urlParams };
