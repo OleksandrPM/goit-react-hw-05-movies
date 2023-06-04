@@ -103,3 +103,8 @@ the line are required.
 3. If all steps are successful, the built production version of the project
    files is sent to the `gh-pages` branch. Otherwise, the script execution log
    will indicate what the problem is.
+
+
+### This project uses TMDB API
+
+https://www.themoviedb.org/
