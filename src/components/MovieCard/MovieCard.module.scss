@@ -1,0 +1,58 @@
+.card {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  & img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+
+    -webkit-box-shadow: 2px 3px 7px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 3px 7px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 3px 7px -1px rgba(0, 0, 0, 0.75);
+
+    @media screen and (max-width: 374.98px) {
+      width: 100%;
+    }
+
+    @media screen and (min-width: 375px) {
+      width: 355px;
+    }
+
+    @media screen and (min-width: 768px) {
+      width: 33%;
+      margin: 0;
+    }
+  }
+}
+
+.about {
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  & h2 {
+    margin-bottom: 10px;
+    text-align: center;
+
+    @media screen and (min-width: 768px) {
+      text-align: start;
+    }
+  }
+
+  & .score {
+    margin-bottom: 10px;
+  }
+
+  & article {
+    margin-bottom: 10px;
+  }
+}

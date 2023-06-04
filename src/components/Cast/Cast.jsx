@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCast, urlParams } from 'tmdbApi/tmdb-api';
-import css from './Cast.module.css';
+import scss from './Cast.module.scss';
 import defaultImage from '../../images/Cast/avatar.svg';
 
 export default Cast;
@@ -36,13 +36,15 @@ function Cast() {
   }, [updateCast]);
 
   return (
-    <ul className={css.cast}>
+    <ul className={scss.cast}>
       {cast.map(({ id, imgUrl, name, character }) => {
         return (
           <li key={id}>
             <img src={imgUrl} alt={`Img by ${name}`}></img>
-            <p>{name}</p>
-            <p>Character: {character}</p>
+            <h4 className={scss.name}>{name}</h4>
+            <p className={scss.character}>
+              <span>Character:</span> {character}
+            </p>
           </li>
         );
       })}

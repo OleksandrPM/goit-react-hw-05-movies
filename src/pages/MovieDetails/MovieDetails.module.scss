@@ -1,0 +1,41 @@
+.backlink {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.card {
+  margin-bottom: 10px;
+}
+
+.subnav {
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+  & p {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  & ul {
+    list-style: none;
+
+    & a {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      text-decoration: none;
+      color: #0d253f;
+
+      & .active,
+      &:hover,
+      &:focus {
+        color: red;
+      }
+    }
+  }
+}

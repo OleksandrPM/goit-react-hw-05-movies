@@ -1,5 +1,19 @@
-.head {
-  background-color: rgba(0, 0, 0, 0.2);
+.page {
+  overflow-y: scroll;
+  @media screen and (max-width: 374.98px) {
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  & header {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 }
 
 .container {
@@ -10,6 +24,10 @@
 
   @media screen and (max-width: 374.98px) {
     max-width: 375px;
+  }
+
+  @media screen and (min-width: 375px) {
+    width: 375px;
   }
 
   @media screen and (min-width: 768px) {
@@ -60,20 +78,20 @@ main .container {
   list-style: none;
   display: flex;
   gap: 10px;
-}
 
-.navlink {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  color: #0d253f;
-}
+  & a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #0d253f;
 
-.navlink.active,
-.navlink:hover,
-.navlink:focus {
-  color: red;
+    & .active,
+    &:hover,
+    &:focus {
+      color: red;
+    }
+  }
 }
 
 .section {

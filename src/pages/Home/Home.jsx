@@ -1,7 +1,9 @@
-import MoviesList from 'components/MoviesList';
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { getTrending } from 'tmdbApi/tmdb-api';
 import scss from './Home.module.scss';
+
+const MoviesList = lazy(() => import('../../components/MoviesList'));
+const Loader = lazy(() => import('../../components/Loader'));
 
 export default Home;
 
@@ -28,11 +30,13 @@ function Home() {
   return (
     <>
       <h2 className={scss.title}>Trending today</h2>
-      {trending.length === 0 ? (
-        <h2>Something going wrong...</h2>
-      ) : (
-        <MoviesList movies={trending} />
-      )}
+      <Suspense fallback={<Loader />}>
+        {trending.length === 0 ? (
+          <h2>Something going wrong...</h2>
+        ) : (
+          <MoviesList movies={trending} />
+        )}
+      </Suspense>
     </>
   );
 }

@@ -9,7 +9,7 @@ const Loader = lazy(() => import('../Loader'));
 
 function SharedLayout() {
   return (
-    <div>
+    <div className={scss.page}>
       <header className={scss.head}>
         <div className={scss.container}>
           <div className={scss.logo}>
@@ -19,14 +19,12 @@ function SharedLayout() {
           <nav>
             <ul className={scss.nav_list}>
               <li>
-                <NavLink to="/" end className={scss.navlink}>
+                <NavLink to="/" end>
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/movies" className={scss.navlink}>
-                  Movies
-                </NavLink>
+                <NavLink to="/movies">Movies</NavLink>
               </li>
             </ul>
           </nav>

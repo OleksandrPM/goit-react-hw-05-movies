@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReviews } from 'tmdbApi/tmdb-api';
+import scss from './Reviews.module.scss';
 
 export default Reviews;
 
@@ -34,10 +35,10 @@ function Reviews() {
   return reviews.length === 0 ? (
     <p>{notReviewsMessage}</p>
   ) : (
-    <ul>
+    <ul className={scss.reviews}>
       {reviews.map(({ nickname, content, id }) => (
         <li key={id}>
-          <p>{`Author: ${nickname}`}</p>
+          <h4>{`Author: ${nickname}`}</h4>
           <article>{content}</article>
         </li>
       ))}

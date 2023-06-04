@@ -1,11 +1,8 @@
 import PropTypes from 'prop-types';
 import Image from 'components/Image';
-import css from './MovieCard.module.css';
+import scss from './MovieCard.module.scss';
 
 export default MovieCard;
-
-const alternativeImage =
-  'https://pixabay.com/vectors/cutting-editing-filmstrip-150066/';
 
 MovieCard.propTypes = {
   details: PropTypes.object.isRequired,
@@ -13,7 +10,7 @@ MovieCard.propTypes = {
 
 function MovieCard({ details }) {
   const {
-    imgSrc = alternativeImage,
+    imgSrc = '',
     title = 'Title',
     releaseYear = 'n/a',
     score,
@@ -22,12 +19,12 @@ function MovieCard({ details }) {
   } = details;
 
   return (
-    <div className={css.card}>
+    <div className={scss.card}>
       <Image URL={imgSrc} tags={`Poster "${title}"`} />
 
-      <div className="about">
+      <div className={scss.about}>
         <h2>{`${title} (${releaseYear})`}</h2>
-        <p>{`User Score: ${score}%`}</p>
+        <p className={scss.score}>{`User Score: ${score}%`}</p>
         <h3>Overview</h3>
         <article>{overview}</article>
         <h4>Genres</h4>

@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovies } from 'tmdbApi/tmdb-api';
-import Searchbar from 'components/Searchbar';
-import MoviesList from 'components/MoviesList';
+import scss from './Movies.module.scss';
+
+const Searchbar = lazy(() => import('../../components/Searchbar'));
+const MoviesList = lazy(() => import('../../components/MoviesList'));
+const Loader = lazy(() => import('../../components/Loader'));
 
 export default Movies;
 
@@ -51,9 +54,10 @@ function Movies() {
 
   return (
     <>
-      <h2>Movies Page</h2>
-      <Searchbar onSubmit={updateSearchParams} />
-      {searchedMovies.length !== 0 && <MoviesList movies={searchedMovies} />}
+      <Searchbar className={scss.searchbar} onSubmit={updateSearchParams} />
+      <Suspense fallback={<Loader />}>
+        {searchedMovies.length !== 0 && <MoviesList movies={searchedMovies} />}
+      </Suspense>
     </>
   );
 }

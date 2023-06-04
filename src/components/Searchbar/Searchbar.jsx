@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import css from './Searchbar.module.css';
+import scss from './Searchbar.module.scss';
 
 export default Searchbar;
 
@@ -15,21 +15,19 @@ function Searchbar({ onSubmit }) {
   };
 
   return (
-    <header className={css.searchbar}>
-      <form className={css.form} onSubmit={onSearchSubmit}>
-        <button type="submit" className={css.button}>
-          <span className={css.button_label}>Search</span>
-        </button>
+    <form className={scss.form} onSubmit={onSearchSubmit}>
+      <button type="submit" className={scss.button}>
+        <span className={scss.button_label}>Search</span>
+      </button>
 
-        <input
-          className={css.input}
-          type="text"
-          name="search"
-          autoComplete="off"
-          autoFocus
-          placeholder="Search images and photos"
-        />
-      </form>
-    </header>
+      <input
+        className={scss.input}
+        type="text"
+        name="search"
+        autoComplete="off"
+        autoFocus
+        placeholder="Search movies"
+      />
+    </form>
   );
 }
