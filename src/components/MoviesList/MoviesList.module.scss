@@ -1,0 +1,16 @@
+.movie {
+  padding: 5px;
+}
+
+.movie:nth-child(2n) {
+  background-color: rgba(1, 180, 228, 0.2);
+}
+
+.movie:nth-child(2n + 1) {
+  background-color: rgba(144, 206, 161, 0.2);
+}
+
+.movie a {
+  text-decoration: none;
+  color: inherit;
+}
