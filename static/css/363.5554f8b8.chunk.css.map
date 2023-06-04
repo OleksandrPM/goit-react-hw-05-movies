@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/363.5554f8b8.chunk.css","mappings":"AAAA,wBACE,aACA,sBACA,SAEA,2BACE","sources":["components/Reviews/Reviews.module.scss"],"sourcesContent":[".reviews {\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n\n  & h4 {\n    margin-bottom: 5px;\n  }\n}\n"],"names":[],"sourceRoot":""}

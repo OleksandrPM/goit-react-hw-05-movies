@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/414.788a0375.chunk.css","mappings":"AAAA,yBACE,oBAEA,oCAHF,yBAII","sources":["pages/Movies/Movies.module.scss"],"sourcesContent":[".searchbar {\n  padding-bottom: 10px;\n\n  @media screen and (min-width: 768px) {\n    padding-bottom: 20px;\n  }\n}\n"],"names":[],"sourceRoot":""}
