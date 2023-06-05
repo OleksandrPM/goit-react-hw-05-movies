@@ -1,8 +1,15 @@
-import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
+import {
+  Suspense,
+  lazy,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
+import { HiArrowRight } from 'react-icons/hi';
 import { getDetails } from 'tmdbApi/tmdb-api';
 import scss from './MovieDetails.module.scss';
-import { HiArrowRight } from 'react-icons/hi';
 import alternativeImage from '../../images/cut_film.svg';
 
 export default MovieDetails;
@@ -17,8 +24,8 @@ const file_size = 'w500';
 function MovieDetails() {
   const { id } = useParams();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/';
   const [details, setDetails] = useState({});
+  const backPath = useRef(location);
 
   const updateDetails = useCallback(() => {
     getDetails(id)
@@ -57,7 +64,7 @@ function MovieDetails() {
   return (
     <>
       <div className={scss.backlink}>
-        <BackLink backPath={backLinkHref}>Go back</BackLink>
+        <BackLink backPath={backPath.current}>Go back</BackLink>
       </div>
 
       <div className={scss.card}>

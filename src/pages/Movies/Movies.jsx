@@ -32,9 +32,7 @@ function Movies() {
           }
         });
       } catch (error) {
-        // setError(error);
-      } finally {
-        // setIsLoading(false);
+        console.log(`Error in Movies page during getMovies: ${error}`);
       }
     }
   }, [query]);

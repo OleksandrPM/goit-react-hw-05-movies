@@ -21,9 +21,7 @@ function Home() {
         setTrending(trendingList);
       });
     } catch (error) {
-      // setError(error);
-    } finally {
-      // setIsLoading(false);
+      console.log(`Error in Home page during getTrending: ${error}`);
     }
   }, []);
 
